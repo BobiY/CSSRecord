@@ -1,0 +1,120 @@
+*{margin: 0; padding: 0}
+.eye{
+    width: 55px;
+    height: 55px;
+    border: 1px solid #333;
+    border-radius: 50%;
+    margin: 50px auto;
+    background: red;
+    position: relative;
+}
+
+.eye .line {
+    width: 64%;
+    height: 64%;
+    background: #ff0000;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 10px;
+    margin: 0 auto;
+    border-radius: 60%;
+    box-shadow: 0 0 2px 0 #b20000 inset;
+}
+
+/* 眼睛上的白点 */
+.eye .line:before {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 11px;
+    position: absolute;
+    left: 3px;
+    top: 4px;
+    z-index: 100;
+    border-radius: 60%;
+    background-image: radial-gradient(circle,rgb(225,225,225),rgb(225,225,225),rgba(225,225,225,0.7),rgba(225,225,225,0.3));
+    -webkit-background-image: radial-gradient(circle,rgb(225,225,225),rgb(225,225,225),rgba(225,225,225,0.7),rgba(225,225,225,0.3));
+    -o-background-image: radial-gradient(circle,rgb(225,225,225),rgb(225,225,225),rgba(225,225,225,0.7),rgba(225,225,225,0.3));
+}
+
+/*勾玉开始*/
+.hook {
+    width: 92%;
+    height: 92%;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 5%;
+    margin: 0 auto;
+    border-radius: 60%;
+}
+.hook .bar {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 60%;
+}
+.hook .bar b {
+    display: block;
+    width: 8px;
+    height: 8px;
+    background: #000;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border-radius: 60%;
+}
+/*勾玉的小尖*/
+.hook .bar b:after {
+    content: "";
+    width: 7px;
+    height: 8px;
+    border-color: transparent transparent #000 transparent;
+    border-style: solid;
+    border-width: 0 0 5px 0;
+    position: absolute;
+    top: -1px;
+    left: -3px;
+    z-index: 100;
+    border-radius: 0 0 0 70%;
+    transform: rotate(-75deg);
+    -webkit-transform: rotate(-75deg);
+    -o-transform: rotate(-75deg);
+}
+.hook .bar:nth-child(1){
+    transform: rotate(10deg);
+}
+.hook .bar:nth-child(2){
+    transform: rotate(135deg);
+}
+.hook .bar:nth-child(3){
+    transform: rotate(255deg);
+}
+/* 三勾玉动画 */
+.ani-rotateHook{
+	animation:ani-rotateHook 5s ease-in;
+	/* -webkit-animation:ani-rotateHook 5s ease-in 2.5s; */
+	/* -o-animation:ani-rotateHook 5s ease-in 2.5s; */
+}
+@keyframes ani-rotateHook{
+	0%{
+		opacity:0;
+		transform:scale(0) rotate(0);
+	}
+	20%{
+		opacity:1;
+		transform:scale(1) rotate(360deg);
+	}
+	100%{
+		opacity:1;
+		transform:scale(1) rotate(360deg);
+	}
+	/* 100%{
+		opacity:0;
+		transform:scale(1.8) rotate(-720deg);
+	} */
+}
