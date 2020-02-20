@@ -1,120 +1,99 @@
-*{margin: 0; padding: 0}
-.eye{
-    width: 55px;
-    height: 55px;
-    border: 1px solid #333;
-    border-radius: 50%;
-    margin: 50px auto;
+*{margin: 0; padding: 0;}
+.center{
+    margin: 100px auto;
+    width: 250px;
+    height: 250px;
     background: red;
+    border-radius: 50%;
+    position: relative;
+    border: 3px solid #333;
+}
+.center .black{
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #333;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.center .line{
+    width: 70%;
+    height: 70%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 32px #b20000 inset;
+    border-radius: 50%;
+}
+
+.center .wapper{
+    width: 100%;
+    height: 100%;
     position: relative;
 }
 
-.eye .line {
-    width: 64%;
-    height: 64%;
-    background: #ff0000;
-    position: absolute;
-    right: 0;
-    left: 0;
-    top: 10px;
-    margin: 0 auto;
-    border-radius: 60%;
-    box-shadow: 0 0 2px 0 #b20000 inset;
-}
-
-/* 眼睛上的白点 */
-.eye .line:before {
-    content: "";
-    display: block;
-    width: 10px;
-    height: 11px;
-    position: absolute;
-    left: 3px;
-    top: 4px;
-    z-index: 100;
-    border-radius: 60%;
-    background-image: radial-gradient(circle,rgb(225,225,225),rgb(225,225,225),rgba(225,225,225,0.7),rgba(225,225,225,0.3));
-    -webkit-background-image: radial-gradient(circle,rgb(225,225,225),rgb(225,225,225),rgba(225,225,225,0.7),rgba(225,225,225,0.3));
-    -o-background-image: radial-gradient(circle,rgb(225,225,225),rgb(225,225,225),rgba(225,225,225,0.7),rgba(225,225,225,0.3));
-}
-
-/*勾玉开始*/
-.hook {
-    width: 92%;
-    height: 92%;
-    position: absolute;
-    right: 0;
-    left: 0;
-    top: 5%;
-    margin: 0 auto;
-    border-radius: 60%;
-}
-.hook .bar {
-    display: block;
+.wapper .gouyu{
     width: 100%;
     height: 100%;
     position: absolute;
     left: 0;
     top: 0;
-    border-radius: 60%;
+    border-radius: 50%;
 }
-.hook .bar b {
-    display: block;
-    width: 8px;
-    height: 8px;
-    background: #000;
+.wapper .gouyu b{
     position: absolute;
-    left: 0;
+    left: 50%;
     bottom: 0;
-    border-radius: 60%;
+    transform: translate(-50%, 50%);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    background: #333;
 }
-/*勾玉的小尖*/
-.hook .bar b:after {
+
+.wapper .gouyu b::before{
     content: "";
-    width: 7px;
-    height: 8px;
-    border-color: transparent transparent #000 transparent;
-    border-style: solid;
-    border-width: 0 0 5px 0;
     position: absolute;
-    top: -1px;
-    left: -3px;
-    z-index: 100;
-    border-radius: 0 0 0 70%;
-    transform: rotate(-75deg);
-    -webkit-transform: rotate(-75deg);
-    -o-transform: rotate(-75deg);
+    top: 13px;
+    left: -2px;
+    width: 20px;
+    height: 10px;
+    border-radius: 0 0 118% 0;
+    background: #333;
+    transform: rotate(74deg);
 }
-.hook .bar:nth-child(1){
-    transform: rotate(10deg);
+
+.wapper .gouyu:nth-child(1){
+   transform: rotate(50deg);
 }
-.hook .bar:nth-child(2){
-    transform: rotate(135deg);
+
+.wapper .gouyu:nth-child(2){
+    transform: rotate(180deg);
 }
-.hook .bar:nth-child(3){
-    transform: rotate(255deg);
+
+.wapper .gouyu:nth-child(3){
+    transform: rotate(306deg);
 }
-/* 三勾玉动画 */
-.ani-rotateHook{
-	animation:ani-rotateHook 5s ease-in;
-	/* -webkit-animation:ani-rotateHook 5s ease-in 2.5s; */
-	/* -o-animation:ani-rotateHook 5s ease-in 2.5s; */
+
+/* 动画部分 */
+@keyframes move{
+    0%{
+        opacity: 0;
+        transform: scale(0);
+    }
+    20%{
+        opacity: 1;
+        transform: scale(1) rotate(360deg);
+    }
+    100%{
+        opacity: 1;
+        transform: scale(1) rotate(360deg);
+    }
 }
-@keyframes ani-rotateHook{
-	0%{
-		opacity:0;
-		transform:scale(0) rotate(0);
-	}
-	20%{
-		opacity:1;
-		transform:scale(1) rotate(360deg);
-	}
-	100%{
-		opacity:1;
-		transform:scale(1) rotate(360deg);
-	}
-	/* 100%{
-		opacity:0;
-		transform:scale(1.8) rotate(-720deg);
-	} */
+
+.move{
+    animation: move 4s cubic-bezier(0.74, 0.24, 0.7, 0.86);;
 }
