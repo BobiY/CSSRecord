@@ -6,4 +6,6 @@
 
 - 注意立方体每个面的旋转方向和旋转轴。
 
--*./explme/index.html* 有更加炫酷的动画演示
+- *./explme/index.html* 有更加炫酷的动画演示
+
+- ***[codePen 演示链接](https://codepen.io/hexagoncircle/pen/MWwjpYY)***
