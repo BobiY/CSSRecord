@@ -1,0 +1,77 @@
+:root{
+    --width-common: 400
+}
+body{
+    background: #333;
+}
+.wapper{
+    width: 200px;
+    height: 200px;
+    margin: 50px auto;
+    position: relative;
+    perspective: 600px;
+}
+
+.curb{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: cube-rotation 20s linear infinite;
+}
+@keyframes cube-rotation {
+    from { transform: rotateX(-20deg) rotateY(0) }
+    to   { transform: rotateX(-20deg) rotateY(1turn) }
+  }
+.wapper .mian{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* border: 5px solid #fff; */
+    animation: 
+    tile-color 2s linear alternate infinite,
+    tile-glow 1s linear infinite;
+    text-align: center;
+    line-height: 200px;
+    font-size: 45px;
+}
+@keyframes tile-color {
+    0%   { background-color: red    }
+    25%  { background-color: orange }
+    50%  { background-color: green  }
+    100% { background-color: blue   }
+    75%  { background-color: yellow }
+  }
+  @keyframes tile-glow {
+    50% { opacity: 0.5 }
+  }
+/* 前 */
+.mian:nth-child(1) { 
+    transform: rotateY(0) translateZ(100px);
+} 
+
+/* 后 */
+.mian:nth-child(2) { 
+    transform: rotateY(180deg) translateZ(100px);
+} 
+
+/* 左 */
+.mian:nth-child(3) { 
+    transform: rotateY(-90deg) translateZ(100px);
+}
+
+/* 右 */
+.mian:nth-child(4) { 
+    transform: rotateY(90deg) translateZ(100px);
+}
+/* 上 */
+.mian:nth-child(5) { 
+    transform: rotateX(-90deg) translateZ(100px);
+}
+
+/* 下 */
+.mian:nth-child(6) { 
+    transform: rotateX(90deg) translateZ(100px);
+}
