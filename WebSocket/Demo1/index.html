@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="text"/>
+    <button id="send">发送</button>
+    <div id="showMessage"></div>
+</body>
+<script>
+    const socket = new WebSocket('ws://localhost:3000')
+    socket.onopen = function(e) {
+        console.log('socket is running...')
+    }
+    socket.onmessage = function(e) {
+        console.log(e.data);
+        showMessage.innerHTML = e.data;
+    }
+    socket.onclose = function(e) {
+        console.log('socket is closed...', e);
+    }
+    send.onclick = function() {
+        const tet = text.value;
+        socket.send(tet);
+    }
+</script>
+</html>
