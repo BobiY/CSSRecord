@@ -43,13 +43,9 @@
 
 - 变换矩阵，记为 M
 
-$$
- \left[
- \begin{matrix}
-   1 & 2 & 3 \\
-   4 & 5 & 6 \\
-   7 & 8 & 9
-  \end{matrix}
-  \right] \tag{3}
-$$
+![矩阵变换](https://github.com/BobiY/CSSRecord/blob/master/SVG/Zuobiao/image/juzhen.png)
+
+**平移，旋转，缩放就是线性变换**
+
+**在 viewBox中 .5 的偏移，会使线条比较锐利**
 
