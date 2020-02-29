@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html,body{
+            width: 100%;
+            height: 100%;
+            transform: rotate();
+        }
+    </style>
+</head>
+<body>
+    <svg width='100%' height='100%'>
+        <defs>
+            <clipPath id="path1">
+                <polygon points='20 20, 220 20, 220 220, 20 290' fill='rgba(0, 0, 0, 0.5)' transform='rotate(60)'>
+                    <animateTransform 
+                        attributeType="XML"
+                        attributeName="transform"
+                        type='rotate'
+                        from='-90'
+                        to='0'
+                        end='1s'
+                        
+                        dur="2s"
+                        repeatCount="indefinite"
+                    >   
+                    </animateTransform>
+                </polygon>
+                <!-- <polygon points='220 20, 420 20, 420 140, 220 220' fill='rgba(200, 200, 200, 0.5)'></polygon> -->
+            </clipPath>
+        </defs>
+        <image href='./tu.jpg' x='20' y='20' width='400' height='400' preserveAspectRatio='xMinYMin slice' clip-path='url(#path1)'/>
+        <!-- <polygon points='20 20, 220 20, 220 220, 20 290' fill='rgba(0, 0, 0, 0.5)' transform='rotate(0)'>
+            <animateTransform 
+                attributeType="XML"
+                attributeName="transform"
+                type='rotate'
+                from='0'
+                to='90'
+                dur="2s"
+                repeatCount="indefinite"
+            >   
+            </animateTransform>
+        </polygon> -->
+    </svg>
+</body>
+</html>
