@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html, body{
+            margin: 30 auto;
+            width: 100%;
+            height: 100%;
+        }
+        div{
+            width: 30px;
+            height: 30px;
+            border-radius: 100%;
+            background: hsl(120, 100%, 50%);
+            position: absolute;
+        }
+        #d1{
+            background: hsl(0, 100%, 50%);
+        }
+        #d3{
+            background: hsl(240, 100%, 60%);
+        }
+    </style>
+</head>
+<body>
+    <div id="d1"></div>
+    <div id="d2"></div>
+    <div id="d3"></div>
+</body>
+<script>
+    const xRange=[30, 800]
+    const randomPos = () => Math.random()*(600-30);
+    const distance = 150;
+    var d1L = randomPos();
+    d1.style.left = d1L + "px";
+    var d1T = randomPos();
+    d1.style.top = d1T + "px";
+    var d2L = randomPos();
+    d2.style.left = d2L + "px";
+    var d2T = randomPos();
+    d2.style.top = d2T + "px";
+
+    var d3L = randomPos();
+    var d3T = randomPos();
+    d3.style.left = d3L + "px";
+    d3.style.top = d3T + "px";
+
+    const d22 = {
+        x: d2L,
+        y: d2T,
+        ele: d2
+    }
+    const d33 = {
+        x: d3L,
+        y: d3T,
+        ele: d3
+    }
+    const ele = [d22, d33];
+    const xishu = 0.02;
+    var vx = 0;
+    var vy = 0;
+    var lastFrameTime = +new Date();
+    const update = () => {
+        var frameTime = +new Date();
+        var t = frameTime - lastFrameTime;
+        t/=200;
+        function move(x,y) {
+            const dx = x - d1L;
+            const dy = y - d1T;
+            // console.log("dx",d2L - d1L,dy)
+            const dis = Math.sqrt(dx*dx + dy*dy);
+            // console.log(dis)
+            const df = dis - distance;
+            // 计算单位向量
+            const ddx = dx / dis;
+            const ddy = dy / dis;
+
+            // 将力转化为向量
+            const f = df * xishu;
+            const fx = ddx * f;
+            const fy = ddy * f;
+
+            // 计算速度
+            vx = fx/t;
+            vy = fy/t;
+            // console.log(vx,vy)
+            // 计算最终位置
+            //d2L -= vx * t; // 表示的是两个点在靠近（默认是弹簧拉开）
+            //d2T -=vy * t;
+            return {
+                dx: vx*t,
+                dy: vy*t
+            }
+        }
+        ele.forEach( item => {
+            const d = move(item.x, item.y);
+            item.x = item.x -=d.dx;
+            item.y = item.y -= d.dy;
+            item.ele.style.top = item.y + "px";
+            item.ele.style.left = item.x + "px";
+        } );
+        requestAnimationFrame(update)
+    }
+    requestAnimationFrame(update)
+</script>
+</html>
