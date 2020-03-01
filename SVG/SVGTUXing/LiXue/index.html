@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>svg动画</title>
+    <style>
+        html,body,svg{
+            margin:0;
+            padding:0;
+            width: 100%;
+            height:100%;
+        }
+    </style>
+    <script src="./tanghuang.js"></script>
+</head>
+<body>
+    <svg 
+        width="10000" 
+        height="1000"
+        viewBox="-400 -400 800 800"
+    >
+        <path 
+            id="links"
+            stroke="gray"
+            fill="none"
+        ></path>
+    </svg>
+     
+    <script>
+        var points = 'a,b,c'.split(',').map(function(name,index,arr){
+            return {
+                name:name,
+                color:'hsl('+ (360*index/arr.length) + ',100%,60%)'
+            };
+        });
+        var relation = 300;
+        var svg = document.querySelector('svg');
+        var k = 0.05; // 弹簧的弹力系数
+        var Vector = window.Vector;
+        function random(min,max){
+            return Math.round(min +(max - min) *Math.random());
+        };
+        points.forEach(function(point){
+            var circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+            var x = random(-400,400);
+            var y = random(-400,400);
+            circle.setAttribute('cx',x);
+            circle.setAttribute('cy',y);
+            circle.setAttribute('r',10);
+            circle.setAttribute('fill',point.color);
+            svg.appendChild(circle);
+            point.circle = circle;
+            point.s = new Vector(x-0,y-0); // 开始相对于 0，0 点的矢量坐标
+            point.v = new Vector();
+            point.a = new Vector();
+        });
+        var lastFrameTime = +new Date();
+        function update(){
+            var frameTime = +new Date();
+            var t = frameTime - lastFrameTime;
+            t/=200;
+            //点位置更新
+            points.forEach(function(pa){
+                var f = new Vector();
+                //计算合力
+                points.forEach(function(pb){
+                    if(pa == pb) return;
+                    var x = Vector.fromPoints(pa.s,pb.s); // 计算两点产生的力
+                    var delta = x.length() -relation;  // 计算两点间的距离和平衡距离之间的距离
+                    //f = k * x
+                    f = f.add(x.normalize(delta * k)); // normalize
+                });
+                // f = ma;
+                pa.a = f; 
+                // v = a*t + v0
+                pa.v = pa.v.add(pa.a.multipy(t)).multipy(0.98);
+                // s = v*t
+                pa.s = pa.s.add(pa.v.multipy(t));
+                pa.circle.setAttribute('cx',pa.s.x);
+                pa.circle.setAttribute('cy',pa.s.y);
+            });
+            //连线更新
+            var linkPath = [];
+            points.forEach(function(pa){
+                var sa = pa.s;
+                points.forEach(function(pb){
+                    if(pa == pb) return;
+                    var sb = pb.s;
+                    linkPath = linkPath.concat([
+                        'M',sa.x,sa.y,
+                        'L',sb.x,sb.y
+                    ]);
+                });
+            });
+            document.getElementById('links').setAttribute('d',linkPath.join(' '))
+            lastFrameTime = frameTime;
+            window.requestAnimationFrame(update);
+        };
+        window.requestAnimationFrame(update);
+    </script>
+</body>
+</html>
