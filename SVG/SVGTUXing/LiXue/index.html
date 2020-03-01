@@ -65,10 +65,11 @@
                 //计算合力
                 points.forEach(function(pb){
                     if(pa == pb) return;
-                    var x = Vector.fromPoints(pa.s,pb.s); // 计算两点产生的力
-                    var delta = x.length() -relation;  // 计算两点间的距离和平衡距离之间的距离
-                    //f = k * x
-                    f = f.add(x.normalize(delta * k)); // normalize
+                    var x = Vector.fromPoints(pa.s,pb.s); // 计算两点产生的向量
+                    var delta = x.length() - relation;  // 计算两点间的距离和平衡距离之间的距离
+                    //f = k * x delta * k 表示的是弹簧产生了多大的力
+                    // 算出单位矢量，绕后将标量抓换为同方向的矢量
+                    f = f.add(x.normalize(delta * k)); // normalize 方法是把 弹窗产生的力变成向量描述
                 });
                 // f = ma;
                 pa.a = f; 
