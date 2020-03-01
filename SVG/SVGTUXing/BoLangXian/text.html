@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #dash{
+            /* border: 3px dashed #333; */
+            stroke-dasharray: 20px;
+            stroke-dashoffset: 500px;
+        }
+    </style>
+</head>
+<body>
+    <svg width='300' height='300'>
+        <path d='M0 150, L 10 170, 20 130, 30 170, 40 130' stroke='#333' fill='none' stroke-dashArray='50' stroke-dashoffset='50'>
+            <animate
+                attributeName='stroke-dashoffset'
+                attributeType='XML'
+                values='90;-90'
+                dur='3s'
+                repeatCount='indefinite'
+                fill='freeze'
+            >
+            </animate>    
+        </path>
+        <rect x='10' y='10' width='100' height='100' stroke='red' id="dash" fill='none'>
+            <animate
+                attributeName='stroke-dashoffset'
+                attributeType='XML'
+                values='90;-90;90'
+                dur='3s'
+                repeatCount='indefinite'
+                fill='freeze'
+            >
+            </animate>
+        </rect>
+    </svg>
+    <div id="dash"></div>
+</body>
+</html>
