@@ -7,3 +7,7 @@
 - stroke-dasharray 表示虚线描边。可选值为：none, <dasharray>, inherit. 其中，none表示不是虚线；<dasharray>为一个逗号或空格分隔的数值列表。表示各个虚线端的长度。可以是固定的长度值，也可以是百分比值；inherit表继承。
 - stroke-dashoffset 表示虚线的起始偏移。可选值为：<percentage>, <length>, inherit. 百分比值，长度值，继承。
 - stroke-opacity 表示描边透明度。默认是1.
+
+### stroke-dasharray 和 stroke-dashoffset
+
+这个两个属性可以实现很炫酷的描边特效，[点击这里](https://codepen.io/bobiy/pen/ExjXWPO)
