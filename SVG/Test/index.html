@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        @keyframes move {
+            100%{
+                transform: translateX(400px);
+            }
+        }
+        .a{
+            width: 100px;
+            height: 100px;
+            margin-left: 400px;
+            background: aqua;
+        }
+        .move {
+            animation: move 2s ease;
+            animation-iteration-count: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="a move" id="a"></div>
+    <script>
+        a.addEventListener('animationend', () => {
+            // alert('over');
+            a.className = 'a';
+            a.getBoundingClientRect(); // 这一步用来触发重绘，更新完 class 再进行添加
+            a.className = 'a move';
+        })
+    </script>
+</body>
+</html>

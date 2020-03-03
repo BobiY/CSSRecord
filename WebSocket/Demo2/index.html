@@ -15,6 +15,12 @@
             // socket.emit('message', 'Hellow')
         })
         socket.emit('message', 'Hellow')
+        const socket1 = io('ws://localhost:3000/my');
+        socket1.on('hi', str => {
+            console.log(str);
+            // socket.emit('message', 'Hellow')
+        })
+        socket1.emit('message', 'Hellow')
     </script>
 </body>
 </html>

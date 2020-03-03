@@ -10,3 +10,8 @@ io.on('connection', socket => {
         console.log('socket is closed...')
     })
 });
+const nsp = io.of('/my');
+nsp.on('connection', function(socket){
+  console.log('someone connected');
+  nsp.emit('hi', 'everyone!');
+});

@@ -1,16 +1,22 @@
 // 生成一个向量
+interface IPoint{
+    x: number;
+    y: number;
+}
 export default class Vector {
+    x: number;
+    y: number;
     constructor(x=0,y=0) {
         this.x = x;
         this.y = y;
     }
 
     // 计算两个点形成的向量
-    static formPoints(point1, point2) {
+    static formPoints(point1: IPoint, point2: IPoint) {
         return new Vector(point2.x - point1.x, point2.y - point1.y)
     }
     // 向量相加;
-    add(point) {
+    add(point: IPoint) {
         return new Vector(this.x + point.x, this.y + point.y);
     }
 
@@ -26,7 +32,7 @@ export default class Vector {
     }
 
     // 向量相乘
-    multiply(scale) {
+    multiply(scale: number) {
         // 乘法的思路是，先将初始向量单位化，然后在乘以新向量的长度，从而转换成新向量
         return new Vector(this.x*scale, this.y*scale)
     }
