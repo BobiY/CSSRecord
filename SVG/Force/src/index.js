@@ -1,20 +1,19 @@
 import Vector from "./Vector";
 import { defaultCount, subductionCoefficient, SVG_NS, CIRCLE_R, DISTANCE, COEFFICIENT_OF_ELASTICITY } from "./constant";
-import Utils from "./Utils";
-import Circle from "./SVGGraph/baseGraph/circle";
 import Drag from "./Drag/index";
+import Utils from "./Utils";
 export default class Force{
     // root 根元素  eleCount 要生成的元素个数
     constructor(root, eleCount) {
-        const boundBox = root.getBoundingClientRect();
         this.update = this.update.bind(this);
         this.count = 0;
         this.root = root;
         this.eleCount = eleCount;
-        this.xRange = [0, boundBox.width];
-        this.yRange = [0, boundBox.height];
         this.circle = [];
         this.paused = false;
+        const boundBox = root.getBoundingClientRect();
+        this.xRange = [0, boundBox.width];
+        this.yRange = [0, boundBox.height];
         this.path = this.initPath();
         this.rootSVG = this.initRoot();
         this.rootSVG.appendChild(this.path);
@@ -56,15 +55,17 @@ export default class Force{
         circle.y = pos.y;  // 记录元素的纵坐标
         circle.idx = Math.random();
 
-        // 初始化拖拽
-        new Drag(circle, this.start.bind(this), this.link.bind(this), this.start1.bind(this), this.end.bind(this));
         this.circle.push(circle);
         this.rootSVG.appendChild(circle);
+
+        // 初始化拖拽
+        new Drag(circle, this.start.bind(this), this.start1.bind(this), this.end.bind(this));
     }
     randomPos() {
+        const ins = Utils.getInstance().getRandom;
         return {
-            x: Math.random()*(this.xRange[1] - this.xRange[0]),
-            y: Math.random()*(this.yRange[1] - this.yRange[0])
+            x: ins(...this.xRange),
+            y: ins(...this.yRange)
         }
     }
 
@@ -73,7 +74,7 @@ export default class Force{
         const newPoints = Vector.formPoints(circle1, circle2);
         const len = newPoints.length();
         const dis = len - DISTANCE;
-        // 基于弹簧的 
+        // 基于弹簧模型
         const f = newPoints.normalize().multiply(dis*COEFFICIENT_OF_ELASTICITY);
         return originF.add(f);
     }
@@ -90,13 +91,10 @@ export default class Force{
             this.circle.forEach( sub => {
                 if ( item === sub ) return;
                 originF = this.calcF(originF, item, sub);
-
             } );
             // 这里计算的是瞬时加速度，模拟极端时间内，物体做的是匀加速运动
             item.a = originF; // f = ma m=1(忽略质量对加速度的影响)
-            // console.log(originF)
             item.v = item.v.add(item.a.multiply(t)).multiply(subductionCoefficient);
-            // console.log(item.v)
             item.s = item.s.add(item.v.multiply(t));
             item.setAttribute('cx', item.s.x);
             item.setAttribute('cy', item.s.y);
@@ -129,14 +127,14 @@ export default class Force{
         requestAnimationFrame(this.update);
     }
     // animate (动画)
-    start1(ele) { // move 时执行的动画
+    start1(ele) { // 鼠标拖动时执行的动画
         this.lastFrameTime = +new Date();
         requestAnimationFrame(this.update1.bind(this, ele));
     }
     update1(ele) {
         var frameTime = +new Date();
         var t = frameTime - this.lastFrameTime;;
-        t/=500;  // 元素围着他转
+        t/=500;
         // ele 作为轴心元素 其他
         this.circle.forEach( item => {
             if( item.idx === ele.idx ) return;

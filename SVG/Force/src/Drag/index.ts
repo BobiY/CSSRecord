@@ -5,26 +5,24 @@ export default class Drag{
     initY: number;
     down: boolean;
     start: any;
-    link: any;
     update: any;
     target: any;
     end: any;
-    constructor(ele: any, start: any, link: any, update:any, end: any ) {
+    constructor(ele: any, start: any, update:any, end: any ) {
+        this.initX = 0;
+        this.initY = 0;
+        this.target = null;
+        this.down = false;
         this.ele = ele;
+        this.start = start;
+        this.update = update;
+        this.end = end;
         this.mousedown = this.mousedown.bind(this);
         this.mousemove = this.mousemove.bind(this);
         this.mouseup = this.mouseup.bind(this);
         ele.addEventListener('mousedown', this.mousedown);
         document.addEventListener('mouseup', this.mouseup);
         document.addEventListener('mousemove', this.mousemove);
-        this.initX = 0;
-        this.initY = 0;
-        this.down = false;
-        this.start = start;
-        this.link = link;
-        this.update = update;
-        this.target = null;
-        this.end = end;
     }
 
     mousedown(e: any) {
@@ -54,11 +52,11 @@ export default class Drag{
         const dy = e.layerY - this.initY;
         this.ele.x += dx;
         this.ele.y += dy;
-        this.ele.s = new Vector(this.ele.x, this.ele.y);  // 放置 s 不更新使元素重回原来位置
         this.initX = e.layerX;
         this.initY = e.layerY;
         this.ele.setAttribute('cx', this.ele.x);
         this.ele.setAttribute('cy', this.ele.y);
+        this.ele.s = new Vector(this.ele.x, this.ele.y);  // 放置 s 不更新使元素重回原来位置
         this.update(this.ele); // 更新其他元素位置
     }
 }
