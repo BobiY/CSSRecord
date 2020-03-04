@@ -134,7 +134,7 @@ export default class Force{
     update1(ele) {
         var frameTime = +new Date();
         var t = frameTime - this.lastFrameTime;;
-        t/=500;
+        t/=350;
         // ele 作为轴心元素 其他
         this.circle.forEach( item => {
             if( item.idx === ele.idx ) return;
