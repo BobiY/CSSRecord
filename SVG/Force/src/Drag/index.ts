@@ -1,4 +1,7 @@
 import Vector from "../Vector";
+import Event from "../EventListener/index";
+
+const event = Event.getInstance();
 export default class Drag{
     ele: any;
     initX: number;
@@ -29,7 +32,8 @@ export default class Drag{
         // 鼠标落下事件
         if(e.target !== this.ele) {return ;}
         this.target = e.target;
-        this.end(); // 当触发鼠标落下事件时，将原有的动画直接停止
+        // 当触发鼠标落下事件时，将原有的动画直接停止
+        event.emit('end');
         this.initX = e.layerX;
         this.initY = e.layerY;
         this.down = true;
@@ -42,7 +46,7 @@ export default class Drag{
         this.initY = 0;
         this.initX = 0;
         this.target = null;
-        this.start(this.ele);
+        event.emit('start');
     }
 
     mousemove(e: any) {
@@ -57,6 +61,8 @@ export default class Drag{
         this.ele.setAttribute('cx', this.ele.x);
         this.ele.setAttribute('cy', this.ele.y);
         this.ele.s = new Vector(this.ele.x, this.ele.y);  // 放置 s 不更新使元素重回原来位置
-        this.update(this.ele); // 更新其他元素位置
+
+        // 更新其他元素位置
+        event.emit('start1', this.ele);
     }
 }

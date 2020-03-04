@@ -1,5 +1,5 @@
 // 默认计算 1000 次达到平衡
-export const defaultCount = 1500;
+export const defaultCount = 1300;
 
 // 力的损耗系数 每次速度的消减系数
 export const subductionCoefficient = .98;

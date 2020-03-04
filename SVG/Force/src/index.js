@@ -2,6 +2,9 @@ import Vector from "./Vector";
 import { defaultCount, subductionCoefficient, SVG_NS, CIRCLE_R, DISTANCE, COEFFICIENT_OF_ELASTICITY } from "./constant";
 import Drag from "./Drag/index";
 import Utils from "./Utils";
+import Event from "./EventListener/index";
+
+const event = Event.getInstance();
 export default class Force{
     // root 根元素  eleCount 要生成的元素个数
     constructor(root, eleCount) {
@@ -19,6 +22,7 @@ export default class Force{
         this.rootSVG.appendChild(this.path);
         this.root.appendChild(this.rootSVG);
         this.initMoveEle(eleCount);
+        this.initEvent();
         this.start();
     }
 
@@ -60,6 +64,11 @@ export default class Force{
 
         // 初始化拖拽
         new Drag(circle, this.start.bind(this), this.start1.bind(this), this.end.bind(this));
+    }
+    initEvent() { // 注册时间，可以在其他地方调用
+        event.addEvent('start', this.start, this);
+        event.addEvent('start1', this.start1, this);
+        event.addEvent('end', this.end, this);
     }
     randomPos() {
         const ins = Utils.getInstance().getRandom;
@@ -128,13 +137,14 @@ export default class Force{
     }
     // animate (动画)
     start1(ele) { // 鼠标拖动时执行的动画
+        // 目前存在的问题是，拖动一次移动一次，停止拖拽则不动了
         this.lastFrameTime = +new Date();
         requestAnimationFrame(this.update1.bind(this, ele));
     }
     update1(ele) {
         var frameTime = +new Date();
         var t = frameTime - this.lastFrameTime;;
-        t/=350;
+        t/=480;
         // ele 作为轴心元素 其他
         this.circle.forEach( item => {
             if( item.idx === ele.idx ) return;
