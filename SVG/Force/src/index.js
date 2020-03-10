@@ -3,7 +3,7 @@ import { defaultCount, subductionCoefficient, SVG_NS, CIRCLE_R, DISTANCE, COEFFI
 import Drag from "./Drag/index";
 import Utils from "./Utils";
 import Event from "./EventListener/index";
-
+import Circle from "./SVGGraph/baseGraph/circle";
 const event = Event.getInstance();
 export default class Force{
     // root 根元素  eleCount 要生成的元素个数
@@ -47,11 +47,21 @@ export default class Force{
     }
     createCircle() {
         const pos = this.randomPos();
-        const circle = document.createElementNS(SVG_NS, 'circle');
-        circle.setAttribute('cx', pos.x);
-        circle.setAttribute('cy', pos.y);
-        circle.setAttribute('r', CIRCLE_R);
-        circle.setAttribute('fill', `hsl(${Math.random()*240}, ${50 + Math.random()*50}%, 60%)`);
+        const circle = new Circle({
+            cx: pos.x,
+            cy: pos.y,
+            r: CIRCLE_R,
+            fill: `hsl(${Math.random()*240}, ${50 + Math.random()*50}%, 60%)`
+        });
+        circle.addEvent('mousedown', () => {
+            event.emit('end');
+        })
+        circle.addEvent('mousemove', () => {
+            event.emit('start1', circle);
+        });
+        circle.addEvent('mouseup', () => {
+            event.emit('start');
+        })
         circle.s = new Vector(pos.x, pos.y);  // 初始位移向量
         circle.v = new Vector(); // 初始速度向量
         circle.a = new Vector(); // 初始加速度向量;
@@ -60,10 +70,10 @@ export default class Force{
         circle.idx = Math.random();
 
         this.circle.push(circle);
-        this.rootSVG.appendChild(circle);
+        this.rootSVG.appendChild(circle.getEle());
 
         // 初始化拖拽
-        new Drag(circle, this.start.bind(this), this.start1.bind(this), this.end.bind(this));
+        new Drag(circle);
     }
     initEvent() { // 注册时间，可以在其他地方调用
         event.addEvent('start', this.start, this);

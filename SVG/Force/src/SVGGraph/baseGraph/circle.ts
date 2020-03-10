@@ -10,6 +10,7 @@ export default class Circle implements BaseGraph{
     stroke='#333';
     strokeWidth='2';
     circle: SVGElement | null=null;
+    eventMap: Map<string, any>;
     constructor(option: ICircleOption) {
         const { cx, cy, r, fill, stroke } = option;
         this.cx = cx;
@@ -18,7 +19,7 @@ export default class Circle implements BaseGraph{
         this.fill = fill;
         this.stroke = stroke;
         this.circle = null;
-
+        this.eventMap = new Map();
         // 初始化元素
         this.createCircle();
     }
@@ -27,12 +28,27 @@ export default class Circle implements BaseGraph{
         this.circle = document.createElementNS(SVG_NS, 'circle');
 
         // 设置圆的必要参数参数
-        PARAM.forEach( (item: string) => { this.setAttr(item, `${this[item]}`) } )
+        PARAM.forEach( (item: string) => { this.setAttribute(item, `${this[item]}`) } )
     }
-    setAttr(type: string, value: string) {
+    setAttribute(type: string, value: string) {
         this.circle.setAttribute(type, value);
     }
-    getAttr(type: string) {
+    getAttribute(type: string) {
         return this.circle.getAttribute(type);
+    }
+    addEvent(name: string, value: any) {
+        const event = {
+            name: name,
+            callback: value,
+            content: this
+        }
+        this.eventMap.set(name, event);
+    }
+    addEventListener(name: string, callback: any) {
+        console.log(name)
+        this.circle.addEventListener(name, callback);
+    }
+    getEle() {
+        return this.circle;
     }
 }

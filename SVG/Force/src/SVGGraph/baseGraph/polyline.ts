@@ -23,9 +23,9 @@ export default class PolyLine implements BaseGraph {
         this.polyline = document.createElementNS(SVG_NS, 'circle');
 
         // 设置圆的必要参数参数
-        PARAM.forEach( (item: string) => { this.setAttr(item, `${this[item]}`) } )
+        PARAM.forEach( (item: string) => { this.setAttribute(item, `${this[item]}`) } )
     }
-    setAttr(name: string, value: any) {
+    setAttribute(name: string, value: any) {
         if ( name === 'points' ) {
             this.setPoints(value);
             return ;
@@ -34,7 +34,7 @@ export default class PolyLine implements BaseGraph {
         this.polyline.setAttribute(name, value);
     }
 
-    getAttr(name: string) {
+    getAttribute(name: string) {
         if( name === 'points' ) {
             return this.getPoints();
         }
@@ -43,7 +43,7 @@ export default class PolyLine implements BaseGraph {
     setPoints(points: number[][]) {
         this.points.push(...points);
         const p = this.points.join(' ');
-        this.setAttr('points', p);
+        this.setAttribute('points', p);
     }
 
     getPoints() {

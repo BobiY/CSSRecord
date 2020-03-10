@@ -3,6 +3,6 @@ export default class BaseGraph {
     stroke: string; // 描边色
     strokeWidth: string; // 描边宽度
 
-    setAttr: (type: string, value: any) => void; 
-    getAttr: (type: string) => any;
+    setAttribute: (type: string, value: any) => void; 
+    getAttribute: (type: string) => any;
 }

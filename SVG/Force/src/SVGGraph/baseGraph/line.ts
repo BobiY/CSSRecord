@@ -25,13 +25,13 @@ export default class Line implements BaseGraph {
         this.line = document.createElementNS(SVG_NS, 'circle');
 
         // 设置圆的必要参数参数
-        PARAM.forEach( (item: string) => { this.setAttr(item, `${this[item]}`) } )
+        PARAM.forEach( (item: string) => { this.setAttribute(item, `${this[item]}`) } )
     }
-    setAttr(name: string, value: any) {
+    setAttribute(name: string, value: any) {
         this.line.setAttribute(name, value);
     }
 
-    getAttr(name: string) {
+    getAttribute(name: string) {
         return this.line.getAttribute(name);
     }
 }
