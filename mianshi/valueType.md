@@ -20,6 +20,7 @@
 - Boolean
 - Null
 - Undefined
+- Symbol
 
 以上五种类型，是值类型的数据类型，它们遵循在赋值时遵循以下规则：
 
