@@ -1,0 +1,47 @@
+#wapper{
+    width: 500px;
+    height: 300px;
+    margin: 0 auto;
+    border: hsl(60, 100%, 60%);
+    overflow: hidden;
+}
+.content{
+    width: 2500px;
+}
+.content .pic{
+    width: 500px;
+    height: 300px;
+    background: #eee;
+    text-align: center;
+    line-height: 300px;
+    color: #fff;
+    font-size: 25px;
+    float: left;
+}
+
+.content{
+    animation: move 4s;
+    animation-iteration-count: infinite;
+}
+
+.content:hover{
+    animation-play-state: paused;
+}
+@keyframes move{
+    0%{
+        transform: translateX(0);
+    }
+    25%{
+        transform: translateX(-500px);
+    }
+    50%{
+        transform: translateX(-1000px);
+    }
+    75%{
+        transform: translateX(-1500px);
+    }
+    100%{
+        transform: translateX(-2000px);
+    }
+}
+
