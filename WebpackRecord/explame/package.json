@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "simple": "webpack --config simple.webpack.config.js",
     "react": "webpack --config react.webpack.config.js",
-    "css": "webpack --config css.webpack.config.js"
+    "css": "webpack --config css.webpack.config.js",
+    "file": "webpack --config file.webpack.config.js",
+    "dev": "webpack-dev-server --config ./webpack.dev.config.js --open"
   },
   "author": "",
   "license": "ISC",
