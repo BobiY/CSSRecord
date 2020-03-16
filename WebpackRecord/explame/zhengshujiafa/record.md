@@ -75,3 +75,8 @@ if(process.env.NODE_ENV === 'production'){
 } else {
     module.exports = require('./dist/largeNumber.js')
 }
+
+
+#### package.json 设置钩子
+
+"prepublish": "webpack"  在发布前进行打包
