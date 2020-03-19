@@ -9,7 +9,7 @@ module.exports = {
         filename: '[name].js',
         path: path.join(__dirname, "/dist"),
         library: 'largeNumber',
-        libraryExport: 'add',  // 写 default 或者 具体导出的方法或者属性的名字
+        libraryExport: 'default',  // 写 default 或者 具体导出的方法或者属性的名字
         libraryTarget: 'umd'
     },
     mode: 'none',
