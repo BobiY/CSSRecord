@@ -31,16 +31,16 @@ module.exports = {
               remPrecision: 8, // rem小数点后位数
             },
           },
-        //   { // 添加 css 浏览器前缀
-        //     loader: 'postcss-loader',
-        //     options: {
-        //       plugins: () => {
-        //         require('autoprefixer')({
-        //           browsers: ['last 2 vesion', '?1%', 'iOS'],
-        //         });
-        //       },
-        //     },
-        //   },
+          { // 添加 css 浏览器前缀
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => {
+                require('autoprefixer')({
+                  browsers: ['last 2 vesion', '?1%', 'iOS'],
+                });
+              },
+            },
+          },
         ],
       },
       { // 解析 图片
